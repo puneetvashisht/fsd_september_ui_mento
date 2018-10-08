@@ -1,8 +1,29 @@
 
-{{title | capitalize}}
-{{now | date: 'short'}}
 
 <div class="container">
+
+    <div class="row">
+
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="basic-addon1">Course Name</span>
+            </div>
+            <input type="text" #name (change)="0" class="form-control" placeholder="Enter Course Name" aria-label="Username" aria-describedby="basic-addon1">
+          </div>
+
+          <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon1">Course Summary</span>
+              </div>
+              <input type="text" #summary (change)="0" class="form-control" placeholder="Enter Course Name" aria-label="Username" aria-describedby="basic-addon1">
+          </div>
+
+          <button type="button" class="btn btn-primary" (click)="addCourse(name.value, summary.value)">Add Course</button>
+          
+    </div>
+
+    <hr/>
+
   <div class="row">
 
       <div class="input-group mb-3">
@@ -10,7 +31,6 @@
             <span class="input-group-text" id="basic-addon1">Search for Courses</span>
           </div>
           <input type="text" #search (keyup)="0" class="form-control" placeholder="Enter Course Name" aria-label="Username" aria-describedby="basic-addon1">
-         
         </div>
         
   </div>
@@ -18,7 +38,7 @@
 
   <div class="row">
 
-   <my-card *ngFor="let course of courses | searchCourses:search.value" title={{course.title}} summary={{course.summary}}></my-card>
+   <my-card *ngFor="let course of courses| searchCourses:search.value; let i = index" title={{course.title}} summary={{course.summary}} key={{i}}></my-card>
 
   </div>
 
