@@ -1,0 +1,34 @@
+<div class="row">
+
+    <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="basic-addon1">Search for Employee Name</span>
+        </div>
+        <input type="text" #search (keyup)="0" class="form-control" placeholder="Enter First Name" aria-label="Username" aria-describedby="basic-addon1">
+      </div>
+      
+</div>
+
+<table class="table">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">First Name</th>
+        <th scope="col">Last Name</th>
+        <th scope="col">Email</th>
+        <th scope="col">Gender</th>
+        <th scope="col">IP Address</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let employee of employees |searchByName:'email':search.value ; let i = index">
+        <th scope="row">{{i + 1}}</th>
+        <td>{{employee.first_name}}</td>
+        <td>{{employee.last_name}}</td>
+        <td>{{employee.email}}</td>
+        <td>{{employee.gender}}</td>
+        <td>{{employee.ip_address}}</td>
+      </tr>
+      
+    </tbody>
+  </table>
