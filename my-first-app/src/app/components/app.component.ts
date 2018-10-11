@@ -15,7 +15,7 @@ export class AppComponent implements OnInit {
   courses: Array<Course> = [
    
   ];
-  constructor(public http: Http, public courseService: CourseService){
+  constructor(public courseService: CourseService){
 
   }
 

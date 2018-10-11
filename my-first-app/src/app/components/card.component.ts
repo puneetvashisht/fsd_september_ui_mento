@@ -27,7 +27,7 @@ export class CardComponent implements OnInit {
     @Input('key') key : number;
     @Output('courseDeleted') courseDeleted : EventEmitter<Array<Course>> = new EventEmitter();
 
-    constructor(public http: Http, public courseService: CourseService){
+    constructor(public courseService: CourseService){
        
     }
 
