@@ -19,6 +19,6 @@ import { SearchByNamePipe } from './searchbyname.pipe';
     BrowserModule, HttpModule
   ],
   providers: [],
-  bootstrap: [EmployeesComponent]
+  bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -18,6 +18,11 @@ export class AppComponent implements OnInit {
 
   }
 
+  handleCourseDeletion(courses: Array<Course>){
+    console.log('In the parent, ', courses);
+    this.courses = courses;
+  }
+
   addCourse(name: string, summary: string){
     this.http.post('http://localhost:3000/courses', {
       title: name,
