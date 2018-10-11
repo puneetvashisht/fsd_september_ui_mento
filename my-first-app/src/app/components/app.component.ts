@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Course } from './Course';
+import { Course } from '../models/Course';
 import { Http } from '@angular/http';
+import { CourseService } from '../services/course.service';
 
 @Component({
   selector: 'app-root',
@@ -14,7 +15,7 @@ export class AppComponent implements OnInit {
   courses: Array<Course> = [
    
   ];
-  constructor(public http: Http){
+  constructor(public http: Http, public courseService: CourseService){
 
   }
 
@@ -24,28 +25,13 @@ export class AppComponent implements OnInit {
   }
 
   addCourse(name: string, summary: string){
-    this.http.post('http://localhost:3000/courses', {
-      title: name,
-      summary: summary
-    })
-    .toPromise()
-    .then(res=>res.json())
-    .then(data => {
-      console.log(data);
-      this.courses = data;
-    })
+    this.courseService.addCourse(name, summary)
+    .then(data => this.courses = data)
   }
   
   ngOnInit(){
-    this.http.get('http://localhost:3000/courses')
-    .toPromise()
-    .then(res=>res.json())
-    .then(data => {
-      console.log(data);
-      this.courses = data;
-    })
-
-    
+   this.courseService.fetchCourses()
+   .then(data => this.courses = data)
   }
 
   

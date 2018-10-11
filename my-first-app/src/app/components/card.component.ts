@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Http } from '@angular/http';
-import { Course } from './Course';
+import { Course } from '../models/Course';
+import { CourseService } from '../services/course.service';
 
 
 @Component({
@@ -26,7 +27,7 @@ export class CardComponent implements OnInit {
     @Input('key') key : number;
     @Output('courseDeleted') courseDeleted : EventEmitter<Array<Course>> = new EventEmitter();
 
-    constructor(public http: Http){
+    constructor(public http: Http, public courseService: CourseService){
        
     }
 
@@ -36,15 +37,9 @@ export class CardComponent implements OnInit {
 
     deleteCourse(key: number){
         console.log('Deleting index', key);
-        this.http.delete('')
 
-        this.http.delete('http://localhost:3000/courses/' + key)
-        .toPromise()
-        .then(res=>res.json())
-        .then(data => {
-          console.log(data);
-          this.courseDeleted.emit(data);
-        })
+        this.courseService.deleteCourse(key)
+        .then(data => this.courseDeleted.emit(data))
 
     }
 
