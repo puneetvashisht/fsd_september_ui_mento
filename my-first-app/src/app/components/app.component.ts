@@ -2,20 +2,23 @@ import { Component, OnInit } from '@angular/core';
 import { Course } from '../models/Course';
 import { Http } from '@angular/http';
 import { CourseService } from '../services/course.service';
+import { LogService } from '../services/log.service';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.css'],
+  providers: [LogService]
 })
 export class AppComponent implements OnInit {
   title = 'fanTastic weather here in Delhi today!!';
   now = new Date();
+  messages: Array<string> = []
 
   courses: Array<Course> = [
    
   ];
-  constructor(public courseService: CourseService){
+  constructor(public courseService: CourseService, public logService: LogService){
 
   }
 
@@ -25,11 +28,13 @@ export class AppComponent implements OnInit {
   }
 
   addCourse(name: string, summary: string){
+    this.logService.push(name);
     this.courseService.addCourse(name, summary)
     .then(data => this.courses = data)
   }
   
   ngOnInit(){
+   this.messages = this.logService.fetchAll();
    this.courseService.fetchCourses()
    .then(data => this.courses = data)
   }

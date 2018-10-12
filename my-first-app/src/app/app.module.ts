@@ -11,13 +11,15 @@ import { SearchCoursesPipe } from './pipes/searchcourses.pipe';
 import { EmployeesComponent } from './components/employees.component';
 import { SearchByNamePipe } from './pipes/searchbyname.pipe';
 import { CourseService } from './services/course.service';
-
+import { Child1Component } from './components/child1.component';
+import { Child2Component } from './components/child2.component';
+import { StorageServiceModule } from 'angular-webstorage-service';
 @NgModule({
   declarations: [
-    AppComponent, BadgeComponent, CardComponent, TestComponent, CapitalizePipe, SearchCoursesPipe,SearchByNamePipe, EmployeesComponent
+    AppComponent, BadgeComponent, CardComponent, TestComponent, CapitalizePipe, SearchCoursesPipe,SearchByNamePipe, EmployeesComponent, Child1Component,Child2Component
   ],
   imports: [
-    BrowserModule, HttpModule
+    BrowserModule, HttpModule, StorageServiceModule
   ],
   providers: [CourseService],
   bootstrap: [AppComponent]

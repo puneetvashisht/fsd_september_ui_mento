@@ -6,8 +6,8 @@ export class CourseService {
     
     constructor(public http: Http) { }
 
-    // baseUrl: string = 'http://localhost:3000/courses/'
-    baseUrl: string = 'http://localhost:8080/courses'
+    baseUrl: string = 'http://localhost:3000/courses/'
+    // baseUrl: string = 'http://localhost:8080/courses'
 
     addCourse(name: string, summary: string): Promise<any>{
         return this.http.post( this.baseUrl, {
