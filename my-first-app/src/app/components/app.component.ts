@@ -3,6 +3,7 @@ import { Course } from '../models/Course';
 import { Http } from '@angular/http';
 import { CourseService } from '../services/course.service';
 import { LogService } from '../services/log.service';
+import { map, filter } from 'rxjs/operators';
 
 @Component({
   selector: 'app-root',
@@ -36,8 +37,9 @@ export class AppComponent implements OnInit {
   ngOnInit(){
    this.messages = this.logService.fetchAll();
    this.courseService.fetchCourses()
-   .then(data => this.courses = data)
+  //  .filter(data => data)
+   .subscribe((data) => this.courses = data)
+
   }
 
-  
 }
