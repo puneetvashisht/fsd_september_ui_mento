@@ -1,10 +1,15 @@
 var fs = require('fs');
 
 
-fs.readFile('./files/test.txt', (err, data)=>{
-    console.log(''+ data);
+console.log('starting of flow...')
+fs.readFile('./files/config.json', (err, config)=>{
+    console.log(''+ config);
+    console.log(config)
+    var config = JSON.parse(config);
+    console.log(config.ip);
+    console.log(config.port)
+
 })
 
-testAsync(function(res){
-    console.log(res)
-})
+
+console.log('finishing the flow...')
