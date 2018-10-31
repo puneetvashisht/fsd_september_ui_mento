@@ -14,9 +14,10 @@ import { CourseService } from './services/course.service';
 import { Child1Component } from './components/child1.component';
 import { Child2Component } from './components/child2.component';
 import { StorageServiceModule } from 'angular-webstorage-service';
+import { WorkoutComponent } from './components/workout.component';
 @NgModule({
   declarations: [
-    AppComponent, BadgeComponent, CardComponent, TestComponent, CapitalizePipe, SearchCoursesPipe,SearchByNamePipe, EmployeesComponent, Child1Component,Child2Component
+    AppComponent,WorkoutComponent, BadgeComponent, CardComponent, TestComponent, CapitalizePipe, SearchCoursesPipe,SearchByNamePipe, EmployeesComponent, Child1Component,Child2Component
   ],
   imports: [
     BrowserModule, HttpModule, StorageServiceModule

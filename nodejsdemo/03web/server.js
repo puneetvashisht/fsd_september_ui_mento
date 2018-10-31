@@ -1,16 +1,31 @@
 const express = require('express');
-const findWorkouts = require('./workout_repo')
+const bodyParser = require('body-parser')
+const cors = require('cors')
+const repo = require('./workout_repo')
 
 
 var app = express();
 
 
-app.get('/workouts', (req, res)=>{
+// parse application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({ extended: false }))
+ 
+// parse application/json
+app.use(bodyParser.json())
+app.use(cors());
 
-    findWorkouts((err, data)=>{
+app.get('/workouts', (req, res)=>{
+    repo.findWorkouts((err, data)=>{
         res.json(data)
-    });
-    
+    }); 
+})
+
+app.post('/workouts', (req, res)=>{
+    var workout = req.body
+    console.log(workout)
+    repo.insertWorkout(workout, (result)=>{
+        res.status(201).json({message: "Inserted a workout to db", id: workout._id})
+    })
 })
 
 app.get('/hello', (req, res)=>{
