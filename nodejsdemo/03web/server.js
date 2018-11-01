@@ -28,6 +28,22 @@ app.post('/workouts', (req, res)=>{
     })
 })
 
+app.delete('/workouts/:workoutid', (req, res)=>{
+    console.log(req.params.workoutid)
+
+    repo.removeWorkout(req.params.workoutid, (err, result)=>{
+        // console.log(result);
+        if(err){
+            res.status(404).json({success:false})
+        }
+        else{
+            res.status(202).json({success:true})
+        }
+        
+    })
+    
+})
+
 app.get('/hello', (req, res)=>{
     res.type('html');
     res.write('<h1>Some Content to be rendered by the browser</h1>');

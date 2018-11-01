@@ -1,3 +1,4 @@
+var mongodb = require('mongodb');
 const MongoClient = require('mongodb').MongoClient;
 const assert = require('assert');
 
@@ -48,8 +49,23 @@ function insertWorkout( workout ,callback){
 
   })
 
+
+
 }
 
-module.exports = {findWorkouts, insertWorkout}
+function removeWorkout( workoutid ,callback){
+  connect((err, client)=>{
+    console.log("Connected successfully to server");
+    const db = client.db(dbName);
+    const collection = db.collection('workouts')
+    //   Insert one document
+   collection.deleteOne({_id: new mongodb.ObjectID(workoutid)}, (err, result)=>{
+     if(err) throw err;
+     console.log(result.deletedCount)
+     callback(err, result)
+   })
 
+  })
+}
 
+module.exports = {findWorkouts, insertWorkout,removeWorkout}
