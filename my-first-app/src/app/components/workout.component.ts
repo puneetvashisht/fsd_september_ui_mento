@@ -6,7 +6,7 @@ import { Http } from '@angular/http';
     template: `
      <h2>Display workouts</h2>
      <ul>
-        <li *ngFor="let workout of workouts"> {{workout.workoutTitle}}</li>
+        <li *ngFor="let workout of workouts"> {{workout.workoutTitle}} <button (click)="deleteWorkout(workout._id)">Delete</button></li>
      </ul>
     `
 })
@@ -25,6 +25,19 @@ export class WorkoutComponent implements OnInit {
             this.workouts = data;
         
         })
+    }
+
+
+    deleteWorkout(workoutid){
+        console.log('Delete workout', workoutid)
+
+        this.http.delete('http://localhost:3000/workouts/' + workoutid)
+        .toPromise()
+        .then(res=>{
+            console.log(res.status)
+            return res.json()
+        })
+        .then(data=> console.log(data))
     }
 
 }
