@@ -3,6 +3,9 @@ const bodyParser = require('body-parser')
 const cors = require('cors')
 const repo = require('./workout_repo')
 
+const repoMongoose = require('./workout_repo.mongoose')
+
+
 
 var app = express();
 
@@ -15,7 +18,7 @@ app.use(bodyParser.json())
 app.use(cors());
 
 app.get('/workouts', (req, res)=>{
-    repo.findWorkouts((err, data)=>{
+    repoMongoose.findWorkouts((err, data)=>{
         res.json(data)
     }); 
 })
@@ -23,7 +26,9 @@ app.get('/workouts', (req, res)=>{
 app.post('/workouts', (req, res)=>{
     var workout = req.body
     console.log(workout)
-    repo.insertWorkout(workout, (result)=>{
+
+
+    repoMongoose.insertWorkout(workout, ()=>{
         res.status(201).json({message: "Inserted a workout to db", id: workout._id})
     })
 })
