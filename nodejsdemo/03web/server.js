@@ -8,7 +8,11 @@ const repoMongoose = require('./workout_repo.mongoose')
 
 
 var app = express();
+// static content
+app.use(express.static('public'))
 
+app.set('view engine', 'pug')
+app.set('views', './views')
 
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }))
@@ -55,6 +59,16 @@ app.get('/hello', (req, res)=>{
     res.end();
 })
 
+
+app.get('/ssdynamic', function (req, res) {
+    //db logic
+
+    repoMongoose.findWorkouts((err, data)=>{
+        // res.json(data)
+        res.render('index', { title: data[0].workoutTitle, message: data[0].workoutNotes })
+    }); 
+    
+  })
 
 app.get('/', (req, res)=>{
     res.json({"success" : true})
